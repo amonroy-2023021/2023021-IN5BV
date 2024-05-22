@@ -1,12 +1,13 @@
 
 package org.AlexisMonroy.Controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,320 +20,302 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javax.management.Query.value;
 import javax.swing.JOptionPane;
 import org.AlexisMonroy.bean.Proveedores;
 import org.AlexisMonroy.DB.Conexion;
 import org.AlexisMonroy.System.Main;
 
-public class MenuProveedoresController implements Initializable{
-    private Main escenarioPrincipalProveedores;
-
-   private ObservableList<Proveedores> listaProveedores;
-     private enum operador {
-        AGREGRAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO
-    }
-    private operador tipoDeOperador = operador.NINGUNO;
-    @FXML
-    private TableView tblProveedores;
-    @FXML
-    private TableColumn colCodP;
-    @FXML
-    private TableColumn colNITP;
-    @FXML
-    private TableColumn colNomP;
-    @FXML
-    private TableColumn colApeP;
-    @FXML
-    private TableColumn colDireP;
-    @FXML
-    private TableColumn colRazonS;
-    @FXML
-    private TableColumn colContactoP;
-    @FXML
-    private TableColumn colSitioWeb;
-    @FXML
-    private Button btnAgregarP;
-    @FXML
-    private Button btnEditarP;
-    @FXML
-    private Button btnEliminarP;
-    @FXML
-    private Button btnReportesP;
-    @FXML
-    private TextField txtCodigoP;
-    @FXML
-    private TextField txtNITP;
-    @FXML
-    private TextField txtNombresP;
-    @FXML
-    private TextField txtApellidosP;
-    @FXML
-    private TextField txtDireccionP;
-    @FXML private TextField txtRazonSocial;
+public class MenuProveedoresController implements Initializable   {
+    private Main setEscenarioPrincipalProveedores;
+    private enum operaciones {AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO}
+    private operaciones tipoDeOperaciones = operaciones.NINGUNO;
+    private ObservableList<Proveedores> listaProveedores;
+    @FXML private Button btnRegresar3;
     @FXML private TextField txtContactoP;
-    @FXML private TextField txtSitioWeb;
-    @FXML private Button btnRegresarP;
-    
+    @FXML private TextField txtDireccionP;
+    @FXML private TextField txtCodigoP;
+    @FXML private TextField txtNitP;
+    @FXML private TextField txtNombreP;
+    @FXML private TextField txtApellidoP;
+    @FXML private TextField txtRazonP;
+    @FXML private TableView tblProveedores;
+    @FXML private TableColumn colCodigoP;
+    @FXML private TableColumn colContactoP;
+    @FXML private TableColumn colDireccionP;
+    @FXML private TableColumn colNitP;
+    @FXML private TableColumn colNombreP;
+    @FXML private TableColumn colApellidoP;
+    @FXML private TableColumn colRazonP;
+    @FXML private Button btnAgregar;
+    @FXML private Button btnEliminar;
+    @FXML private Button btnEditar;
+    @FXML private Button btnReporte;
+    @FXML private ImageView imgAgregar;
+    @FXML private ImageView imgEliminar;
+    @FXML private ImageView imgEditar;
+    @FXML private ImageView imgReporte;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-         cargarDatos();
-       desactivarControles();
-    }    
-
+    public void initialize(URL location, ResourceBundle resources) {
+        cargarDatos();
+        txtCodigoP.setDisable(true);
+        txtNitP.setDisable(true);
+        txtNombreP.setDisable(true);
+        txtApellidoP.setDisable(true);
+        txtRazonP.setDisable(true);
+        txtContactoP.setDisable(true);
+        txtDireccionP.setDisable(true);
+    }
     
-    public void cargarDatos() {
-        tblProveedores.setItems(getProveedores());
-        colCodP.setCellValueFactory(new PropertyValueFactory<Proveedores, Integer>("codigoProveedor"));
-        colNITP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("NITProveedor"));
-        colNomP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("nombresProveedor"));
-        colApeP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("apellidosProveedor"));
-        colDireP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("direccionProveedor"));
-        colRazonS.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("razonSocial"));
-        colContactoP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("contactoPrincipal"));
-        colSitioWeb.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("paginaWeb"));
+    public void cargarDatos(){
+       tblProveedores.setItems(getProveedores());
+       colCodigoP.setCellValueFactory(new PropertyValueFactory<Proveedores, Integer>("codigoProveedor"));
+       colNitP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("NITProveedor"));
+       colNombreP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("nombreProveedor"));
+       colApellidoP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("apellidoProveedor"));
+       colContactoP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("contactoProveedor"));
+       colRazonP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("razonSocial"));
+       colDireccionP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("direccionProveedor"));
     }
-
-    public void seleccionarElemento() {
-        txtCodigoP.setText(String.valueOf(((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
-        txtNITP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getNITproveedor()));
-        txtNombresP.setText((((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getNombreProveedor()));
-        txtApellidosP.setText((((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getApellidoProveedor()));
-        txtDireccionP.setText((((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getDireccionProveedor()));
-        txtRazonSocial.setText((((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getRazonSocial()));
-        txtContactoP.setText((((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getContactoPrincipal()));
-        txtSitioWeb.setText((((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getPaginaWeb()));
+    
+    public void seleccionarElemento(){
+        txtCodigoP.setText(String.valueOf(((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
+        txtNitP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getNITproveedor()));
+        txtNombreP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getNombreProveedor()));
+        txtApellidoP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getApellidoProveedor()));
+        txtRazonP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getRazonSocial()));
+        txtContactoP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getContactoProveedor()));
+        txtDireccionP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getDireccionProveedor()));  
     }
-
-    public ObservableList<Proveedores> getProveedores() {
-        ArrayList<Proveedores> listaPro = new ArrayList<>();
-        try {
+    
+    public ObservableList<Proveedores> getProveedores(){
+        ArrayList<Proveedores>lista = new ArrayList<>();
+        try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ListarProveedores()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
-                listaPro.add(new Proveedores(resultado.getInt("codigoProveedor"),
-                        resultado.getString("NITProveedor"),
-                        resultado.getString("nombresProveedor"),
-                        resultado.getString("apellidosProveedor"),
-                        resultado.getString("direccionProveedor"),
-                        resultado.getString("razonSocial"),
-                        resultado.getString("contactoPrincipal"),
-                        resultado.getString("paginaWeb")
+                lista.add(new Proveedores (resultado.getInt("codigoProveedor"),
+                                        resultado.getString("NITProveedor"),
+                                        resultado.getString("nombreProveedor"),
+                                        resultado.getString("apellidoProveedor"),
+                                        resultado.getString("razonSocial"),
+                                        resultado.getString("contactoProveedor"),
+                                        resultado.getString("direccionProveedor")
                 ));
             }
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
-        return listaProveedores = FXCollections.observableList(listaPro);
+        return listaProveedores = FXCollections.observableArrayList(lista);
     }
-
-    public void Agregar() {
-        switch (tipoDeOperador) {
+    
+    public void agregar(){
+        switch (tipoDeOperaciones) {
             case NINGUNO:
                 activarControles();
-                btnAgregarP.setText("Guardar");
-                btnEliminarP.setText("Cancelar");
-                btnEditarP.setDisable(true);
-                btnReportesP.setDisable(true);
-                //imgAgregar.setImage(new Image("URL"));
-                tipoDeOperador = operador.ACTUALIZAR;
+                btnAgregar.setText("GUARDAR");
+                btnEliminar.setText("CANCELAR");
+                btnEditar.setDisable(true);
+                btnReporte.setDisable(true);
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/image/cancelar.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
                 guardar();
-                limpiarControles();
-
                 desactivarControles();
-                btnAgregarP.setText("Agregar");
-                btnEliminarP.setText("Eliminar");
-                btnEditarP.setDisable(false);
-                btnReportesP.setDisable(false);
-                /*regresar de nuevo a sus imagenes originales
-                imgAgregar.setImage(new Image("URL"));*/
-                tipoDeOperador = operador.NINGUNO;
-                // cargarDatos();
+                limpiarControles();
+                btnAgregar.setText("AGREGAR");
+                btnEliminar.setText("ELIMINAR");
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/image/AgregarProv.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/image/EliminarProv.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
+            default:
+                throw new AssertionError();
         }
     }
-
-    public void guardar() {
+    
+    public void guardar(){
         Proveedores registro = new Proveedores();
         registro.setCodigoProveedor(Integer.parseInt(txtCodigoP.getText()));
-        registro.setNITproveedor(txtNITP.getText());
-        registro.setNombreProveedor(txtNombresP.getText());
-        registro.setApellidoProveedor(txtApellidosP.getText());
+        registro.setNITproveedor(txtNitP.getText());
+        registro.setNombreProveedor(txtNombreP.getText());
+        registro.setApellidoProveedor(txtApellidoP.getText());
         registro.setDireccionProveedor(txtDireccionP.getText());
-        registro.setRazonSocial(txtRazonSocial.getText());
-        registro.setContactoPrincipal(txtContactoP.getText());
-        registro.setPaginaWeb(txtSitioWeb.getText());
-
-        try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarProveedores(?,?,?,?,?,?,?,?)}");
+        registro.setRazonSocial(txtRazonP.getText());
+        registro.setContactoProveedor(txtContactoP.getText());
+        try{
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarProveedores(?, ?, ?, ?, ?, ?, ?)}");
             procedimiento.setInt(1, registro.getCodigoProveedor());
             procedimiento.setString(2, registro.getNITproveedor());
             procedimiento.setString(3, registro.getNombreProveedor());
             procedimiento.setString(4, registro.getApellidoProveedor());
             procedimiento.setString(5, registro.getDireccionProveedor());
             procedimiento.setString(6, registro.getRazonSocial());
-            procedimiento.setString(7, registro.getContactoPrincipal());
-            procedimiento.setString(8, registro.getPaginaWeb());
+            procedimiento.setString(7, registro.getContactoProveedor());
+            procedimiento.execute();
             listaProveedores.add(registro);
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
-
-    public void eliminar() {
-        switch (tipoDeOperador) {
+    
+    public void eliminar(){
+        switch (tipoDeOperaciones) {
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
-                btnAgregarP.setText("Agregar");
-                btnEliminarP.setText("Eliminar");
-                btnEditarP.setDisable(false);
-                btnReportesP.setDisable(false);
-                /*regresar de nuevo a sus imagenes originales
-                imgAgregar.setImage(new Image("URL"));*/
-                tipoDeOperador = operador.NINGUNO;
+                btnAgregar.setText("AGREGAR");
+                btnEliminar.setText("ELIMINAR");
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/image/AgregarProv.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/image/EliminarProv.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
                 if (tblProveedores.getSelectionModel().getSelectedItem() != null) {
-                    int respuesta = JOptionPane.showConfirmDialog(null, "Confirmas la eliminacion del registro?", "Eliminar Proveedores", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
+                    int respuesta = JOptionPane.showConfirmDialog(null, "Confirmar para eliminar el registro", "Confirmacion Eliminar Proveedor", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (respuesta == JOptionPane.YES_NO_OPTION) {
-                        try {
+                        try{
                             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EliminarProveedores(?)}");
-                            procedimiento.setInt(1, ((Proveedores) tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+                            procedimiento.setInt(1, ((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor());
                             procedimiento.execute();
                             listaProveedores.remove(tblProveedores.getSelectionModel().getSelectedItem());
-                            limpiarControles();
-                        } catch (Exception e) {
+                        }catch(Exception e){
                             e.printStackTrace();
                         }
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Debe de seleccionar un cliente para eliminar");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un elemento!");
                 }
-
-                break;
         }
     }
-
-    public void editar() {
-        switch (tipoDeOperador) {
+    
+    public void editar(){
+        switch (tipoDeOperaciones) {
             case NINGUNO:
                 if (tblProveedores.getSelectionModel().getSelectedItem() != null) {
-                    btnEditarP.setText("Actualizar");
-                    btnReportesP.setText("Cancelar");
-                    btnEliminarP.setDisable(true);
-                    btnAgregarP.setDisable(true);
+                    btnEditar.setText("ACTUALIZAR");
+                    btnReporte.setText("CANCELAR");
+                    btnAgregar.setDisable(true);
+                    btnEliminar.setDisable(true);
+                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                    imgReporte.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                     activarControles();
                     txtCodigoP.setEditable(false);
-                    tipoDeOperador = operador.ACTUALIZAR;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Debe de seleccionar un cliente para editar");
+                    tipoDeOperaciones = operaciones.ACTUALIZAR;
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar algun elemento!");
                 }
                 break;
             case ACTUALIZAR:
                 actualizar();
-                btnEditarP.setText("Editar");
-                btnReportesP.setText("Reportes");
-                btnAgregarP.setDisable(false);
-                btnEliminarP.setDisable(false);
+                btnEditar.setText("EDITAR");
+                btnReporte.setText("REPORTES");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarProv.png"));
+                imgReporte.setImage(new Image("/org/AlexisMonroy/images/ReporteProv.png"));
                 desactivarControles();
                 limpiarControles();
-                tipoDeOperador = operador.NINGUNO;
+                tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
+            default:
+                throw new AssertionError();
         }
     }
-
-    public void reportes() {
-        switch (tipoDeOperador) {
-            case ACTUALIZAR:
-                desactivarControles();
-                limpiarControles();
-                btnEditarP.setText("Editar");
-                btnReportesP.setText("Reportes");
-                btnAgregarP.setDisable(false);
-                btnEliminarP.setDisable(false);
-                tipoDeOperador = operador.NINGUNO;
-
-        }
-    }
-
-    public void actualizar() {
-        try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarProveedores(?,?,?,?,?,?,?,?)}");
-            Proveedores registro = (Proveedores) tblProveedores.getSelectionModel().getSelectedItem();
-            registro.setCodigoProveedor(Integer.parseInt(txtCodigoP.getText()));
-            registro.setNITproveedor(txtNITP.getText());
-            registro.setNombreProveedor(txtNombresP.getText());
-            registro.setApellidoProveedor(txtApellidosP.getText());
+    
+    public void actualizar(){
+        try{
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarProveedores(?, ?, ?, ?, ?, ?, ?)}");
+            Proveedores registro = ((Proveedores)tblProveedores.getSelectionModel().getSelectedItem());
+            registro.setNITproveedor(txtNitP.getText());
+            registro.setNombreProveedor(txtNombreP.getText());
+            registro.setApellidoProveedor(txtApellidoP.getText());
             registro.setDireccionProveedor(txtDireccionP.getText());
-            registro.setRazonSocial(txtRazonSocial.getText());
-            registro.setContactoPrincipal(txtContactoP.getText());
-            registro.setPaginaWeb(txtSitioWeb.getText());
+            registro.setRazonSocial(txtRazonP.getText());
+            registro.setContactoProveedor(txtContactoP.getText());
             procedimiento.setInt(1, registro.getCodigoProveedor());
             procedimiento.setString(2, registro.getNITproveedor());
             procedimiento.setString(3, registro.getNombreProveedor());
             procedimiento.setString(4, registro.getApellidoProveedor());
             procedimiento.setString(5, registro.getDireccionProveedor());
             procedimiento.setString(6, registro.getRazonSocial());
-            procedimiento.setString(7, registro.getContactoPrincipal());
-            procedimiento.setString(8, registro.getPaginaWeb());
-        } catch (Exception e) {
+            procedimiento.setString(7, registro.getContactoProveedor());
+            procedimiento.execute();
+            listaProveedores.add(registro);
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
-
-    public void desactivarControles() {
-        txtCodigoP.setEditable(false);
-        txtNITP.setEditable(false);
-        txtNombresP.setEditable(false);
-        txtApellidosP.setEditable(false);
-        txtDireccionP.setEditable(false);
-        txtRazonSocial.setEditable(false);
-        txtContactoP.setEditable(false);
-        txtSitioWeb.setEditable(false);
-    }
-
-    public void activarControles() {
-        txtCodigoP.setEditable(true);
-        txtNITP.setEditable(true);
-        txtNombresP.setEditable(true);
-        txtApellidosP.setEditable(true);
-        txtDireccionP.setEditable(true);
-        txtRazonSocial.setEditable(true);
-        txtContactoP.setEditable(true);
-        txtSitioWeb.setEditable(true);
-    }
-
-    public void limpiarControles() {
-        txtCodigoP.clear();
-        txtNITP.clear();
-        txtNombresP.clear();
-        txtApellidosP.clear();
-        txtDireccionP.clear();
-        txtRazonSocial.clear();
-        txtContactoP.clear();
-        txtSitioWeb.clear();
-    }
-
-    public Main getEscenarioPrincipalProveedores() {
-        return escenarioPrincipalProveedores;
-    }
-
-    public void setEscenarioPrincipalProveedores(Main escenarioPrincipalProveedores) {
-        this.escenarioPrincipalProveedores = escenarioPrincipalProveedores;
-    }
-    @FXML
-    private void clickMenuPrincipal(ActionEvent event) {
-        if (event.getSource() == btnRegresarP) {
-            escenarioPrincipalProveedores.menuPrincipalView();
+    
+    public void reporte(){
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditar.setText("EDITAR");
+                btnReporte.setText("REPORTES");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarProv.png"));
+                imgReporte.setImage(new Image("/org/AlexisMonroy/images/ReportesProv.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                cargarDatos();
+                break;
+            default:
+                throw new AssertionError();
         }
     }
-    public void setEscenarioPrincipal(Main escenarioPrincipal) {
-        this.escenarioPrincipalProveedores = escenarioPrincipal;
+    
+    public void desactivarControles(){
+        txtCodigoP.setEditable(false);
+        txtDireccionP.setEditable(false);
+        txtContactoP.setEditable(false);
+        txtNitP.setEditable(false);
+        txtNombreP.setEditable(false);
+        txtApellidoP.setEditable(false);
+        txtRazonP.setEditable(false);
+        
     }
     
+    public void activarControles(){
+        txtCodigoP.setEditable(true);
+        txtDireccionP.setEditable(true);
+        txtContactoP.setEditable(true);
+        txtNitP.setEditable(true);
+        txtNombreP.setEditable(true);
+        txtApellidoP.setEditable(true);
+        txtRazonP.setEditable(true);
+        
+    }
+    
+    public void limpiarControles(){
+        txtCodigoP.clear();
+        txtDireccionP.clear();
+        txtContactoP.clear();
+        txtNitP.clear();
+        txtNombreP.clear();
+        txtApellidoP.clear();
+        txtRazonP.clear();
+    }
+
+    public Main getSetEscenarioPrincipalProveedores() {
+        return setEscenarioPrincipalProveedores;
+    }
+    public void setSetEscenarioPrincipalProveedores(Main setEscenarioPrincipalProveedores) {
+        this.setEscenarioPrincipalProveedores = setEscenarioPrincipalProveedores;
+    }
+    @FXML
+    public void handleButtonAction(ActionEvent event) {
+        if (event.getSource() == btnRegresar3){
+            setEscenarioPrincipalProveedores.menuPrincipalView();
+        }
+    }
 }

@@ -11,34 +11,26 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.AlexisMonroy.Controller.MenuClientesController;
+import org.AlexisMonroy.Controller.MenuComprasController;
 import org.AlexisMonroy.Controller.MenuPrincipalController;
 import org.AlexisMonroy.Controller.ProgramadorController;
 import org.AlexisMonroy.Controller.MenuProveedoresController;
 import org.AlexisMonroy.Controller.MenuTipoProductoController;
 
-/**
- *Documentacion
-  -Nombre Mario Andreé Rodríguez Zamboni
-  -Fecha de creacion: 11/04
-  -Fecha de modificacion: 11/04
-  -@autor mrodriguez-2023292
- **/
+
 
 public class Main extends Application {
     private Stage escenarioPrincipal;
     private Scene escena;
     private final String URLVIEW = "/org/AlexisMonroy/View/";
             
-    /* FXMLLoader, Parent, / que se usa para separar*/
     @Override
     public void start(Stage escenarioPrincipal) throws Exception {
         this.escenarioPrincipal = escenarioPrincipal;
         this.escenarioPrincipal.setTitle("MiNiMarket");
         escenarioPrincipal.getIcons().add(new Image(Main.class.getResourceAsStream("/org/AlexisMonroy/images/Logo recortado1.png")));
         menuPrincipalView();
-        //Parent root = FXMLLoader.load(getClass().getResource("/org/mariorodriguez/view/MenuPrincipalView.fxml"));
-        //Scene escena = new Scene(root);
-        //escenarioPrincipal.setScene(escena);
+        
         escenarioPrincipal.show();
     }
 
@@ -81,7 +73,7 @@ public class Main extends Application {
             try{
                 MenuProveedoresController MenuProveedoresView = (MenuProveedoresController)cambiarEscena
                 ("MenuProveedoresView.fxml", 1181,665);
-                MenuProveedoresView.setEscenarioPrincipalProveedores(this);
+                MenuProveedoresView.setSetEscenarioPrincipalProveedores(this);
             }catch(Exception e){
             e.printStackTrace();
             }
@@ -103,6 +95,17 @@ public class Main extends Application {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public void MenuComprasView(){
+        try{
+        MenuComprasController MenuComprasView = (MenuComprasController)cambiarEscena("MenuComprasView.fxml", 765, 429 );
+        MenuComprasView.setEscenarioPrincipalCompras(this);
+        
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    
     }
     
     public static void main(String[] args) {

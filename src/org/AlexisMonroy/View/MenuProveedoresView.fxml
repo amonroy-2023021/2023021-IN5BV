@@ -31,48 +31,57 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnAgregarP" mnemonicParsing="false" onAction="Agregar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Agregar">
-               <styleClass>
-                  <String fx:value="button1" />
-                  <String fx:value="button3" />
-               </styleClass></Button>
-            <ImageView fx:id="imgAgregar" fitHeight="47.0" fitWidth="60.0" onMouseClicked="#Agregar" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/AgregarProv.png" />
-               </image></ImageView>
-            <Button fx:id="btnEliminarP" mnemonicParsing="false" onAction="eliminar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Eliminar" GridPane.rowIndex="1">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="agregar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Agregar">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
                </styleClass>
-            </Button>
-            <ImageView fx:id="imgEliminar" fitHeight="46.0" fitWidth="57.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../images/EliminarProv.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnEditarP" mnemonicParsing="false" onAction="editar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Editar" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fx:id="imgAgregar" fitHeight="47.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/AgregarProv.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="eliminar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Eliminar" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
                </styleClass>
+               <graphic>
+                  <ImageView fx:id="imgEliminar" fitHeight="46.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/EliminarProv.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="43.0" onMouseClicked="#editar" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../images/EditarProv.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnReportesP" mnemonicParsing="false" onAction="#reportes" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Reporte" GridPane.rowIndex="3">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="editar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Editar" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
                </styleClass>
+               <graphic>
+                  <ImageView fx:id="imgEditar" fitHeight="50.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/EditarProv.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <ImageView fx:id="imgReportes" fitHeight="43.0" fitWidth="48.0" onMouseClicked="#reportes" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@../images/ReporteProv.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Reporte" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="button3" />
+               </styleClass>
+               <graphic>
+                  <ImageView fx:id="imgReportes" fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/ReporteProv.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </GridPane>
       <GridPane layoutX="346.0" layoutY="186.0" prefHeight="98.0" prefWidth="536.0">
@@ -90,32 +99,31 @@
             <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtContactoP" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <TextField fx:id="txtDireccionP" GridPane.columnIndex="3" />
-            <TextField fx:id="txtNITP" GridPane.columnIndex="1" />
-            <TextField fx:id="txtNombresP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtApellidosP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtSitioWeb" GridPane.columnIndex="5" />
-            <Label text="NIT Proveedor" />
-            <Label text="Contacto Prov" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label text="Direccion" GridPane.columnIndex="2" />
-            <Label text="Nombre" GridPane.rowIndex="1" />
-            <Label text="Web" GridPane.columnIndex="4" />
-            <Label text="Apellido" GridPane.rowIndex="2" />
-            <Label text="Razon Social" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="txtRazonSocial" layoutX="277.0" layoutY="16.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="txtContactoP" GridPane.columnIndex="5" />
+            <TextField fx:id="txtDireccionP" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNitP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNombreP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtApellidoP" GridPane.columnIndex="3" />
+            <Label text="NIT Proveedor" GridPane.rowIndex="1" />
+            <Label text="Contacto Prov" GridPane.columnIndex="4" />
+            <Label text="Direccion" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Nombre" GridPane.rowIndex="2" />
+            <Label text="Apellido" GridPane.columnIndex="2" />
+            <Label text="Razon Social" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txtRazonP" layoutX="277.0" layoutY="16.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label text="Codigo proveedor" />
+            <TextField fx:id="txtCodigoP" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="tblProveedores" layoutX="240.0" layoutY="295.0" onMouseClicked="selecionarElemento" prefHeight="226.0" prefWidth="704.0">
+      <TableView fx:id="tblProveedores" layoutX="240.0" layoutY="308.0" onMouseClicked="selecionarElemento" prefHeight="226.0" prefWidth="704.0">
          <columns>
-            <TableColumn fx:id="colCodP" minWidth="84.0" prefWidth="108.0" text="codigo Proveedor" />
-            <TableColumn fx:id="colNITP" minWidth="84.0" prefWidth="97.0" text="NITProveedor" />
-            <TableColumn fx:id="colNomP" minWidth="78.0" prefWidth="78.0" text="nombreProveedor" />
-            <TableColumn fx:id="colApeP" minWidth="84.0" prefWidth="84.0" text="apellidoProveedor" />
-            <TableColumn fx:id="colDireP" minWidth="84.0" prefWidth="88.0" text="direccionProveedor" />
-            <TableColumn fx:id="colRazonS" minWidth="84.0" prefWidth="103.0" text="razonSocial" />
-            <TableColumn fx:id="colContactoP" prefWidth="73.0" text="contactoPrincipal" />
-            <TableColumn fx:id="colSitioWeb" prefWidth="75.0" text="paginaWebProveedor" />
+            <TableColumn fx:id="colCodigoP" minWidth="84.0" prefWidth="108.0" text="codigoProveedor" />
+            <TableColumn fx:id="colNitP" minWidth="84.0" prefWidth="97.0" text="NITProveedor" />
+            <TableColumn fx:id="colNombreP" minWidth="78.0" prefWidth="94.0" text="nombresProveedor" />
+            <TableColumn fx:id="colApellidoP" minWidth="84.0" prefWidth="85.0" text="apellidosProveedor" />
+            <TableColumn fx:id="colDireccionP" minWidth="71.0" prefWidth="71.0" text="direccionProveedor" />
+            <TableColumn fx:id="colRazonP" minWidth="84.0" prefWidth="103.0" text="razonSocial" />
+            <TableColumn fx:id="colContactoP" prefWidth="145.0" text="contactoPrincipal" />
          </columns>
       </TableView>
       <Button fx:id="btnRegresarP" layoutX="694.0" layoutY="35.0" mnemonicParsing="false" onAction="clickMenuPrincipal" stylesheets="@../resources/Botones.css" text="Regresar">

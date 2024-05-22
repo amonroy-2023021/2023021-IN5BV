@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.AlexisMonroy.Controller;
 
 import java.io.IOException;
@@ -31,17 +26,13 @@ import org.AlexisMonroy.DB.Conexion;
 import org.AlexisMonroy.System.Main;
 import org.AlexisMonroy.bean.Compras;
 
-/**
- *
- * @author Dell
- */
 public class MenuComprasController implements Initializable {
+        private Main escenarioPrincipalCompras;
     private enum operaciones {
         AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO
     }
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
     private ObservableList<Compras> listaCompras;
-    private Main escenarioPrincipal;
     @FXML private Button btnBack;
     @FXML private TextField txtNumDoc;
     @FXML private TextField txtDescripcion;
@@ -77,14 +68,15 @@ public class MenuComprasController implements Initializable {
 
     public void selecdcionarElemento() {
         txtNumDoc.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
-        txttotalDoc.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getTotalDocumento()));
         txtDescripcion.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getDescripcion()));
+        txttotalDoc.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getTotalDocumento()));
 
     }
 
     public void Agregar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
+                cargarDatos();
                 activarControles();
                 btnAgregar.setText("Guardar");
                 btnEliminar.setText("Cancelar");
@@ -93,9 +85,10 @@ public class MenuComprasController implements Initializable {
                 imgAgregar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
                 imgEliminar.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
-                cargarDatos();
+                
                 break;
             case ACTUALIZAR:
+                cargarDatos();
                 guardar();
                 activarControles();
                 limpiarControles();
@@ -106,7 +99,6 @@ public class MenuComprasController implements Initializable {
                 imgAgregar.setImage(new Image("/org/AlexisMonroy/images/Agregarco.png"));
                 imgEliminar.setImage(new Image("/org/AlexisMonroy/images/Eliminarco.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
-                cargarDatos();
                 break;
         }
 
@@ -117,9 +109,10 @@ public class MenuComprasController implements Initializable {
         registro.setNumeroDocumento(Integer.parseInt(txtNumDoc.getText()));
         LocalDate fechaN = txtfechaDoc.getValue();
         Date fechaC = Date.valueOf(fechaN);
-        registro.setTotalDocumento(Integer.parseInt(txtTotalDoc.getText()));
+        registro.setDescripcion(txtDescripcion.getText());
+        registro.setTotalDocumento(Double.parseDouble(txtTotalDoc.getText()));
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarCompra(?, ?, ?, ?) }");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarCompras(?, ?, ?, ?) }");
             procedimiento.setInt(1, registro.getNumeroDocumento());
             procedimiento.setDate(2, fechaC);
             procedimiento.setString(3, registro.getDescripcion());
@@ -163,7 +156,7 @@ public class MenuComprasController implements Initializable {
                 btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/AlexisMonroy/Agregarco.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/Agregarco.png"));
                 imgEliminar.setImage(new Image("/org/AlexisMonroy/images/Eliminarco.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
@@ -172,7 +165,7 @@ public class MenuComprasController implements Initializable {
                     int respuesta = JOptionPane.showConfirmDialog(null, "Confirmar si elimina el registro", "Eliminar Compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (respuesta == JOptionPane.YES_NO_OPTION) {
                         try {
-                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ElimiarCategoria(?) }");
+                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EliminarCompras(?) }");
                             procedimiento.setInt(1, ((Compras) tblCompras.getSelectionModel().getSelectedItem()).getNumeroDocumento());
                             procedimiento.execute();
                             listaCompras.remove(tblCompras.getSelectionModel().getSelectedItem());
@@ -205,7 +198,6 @@ public class MenuComprasController implements Initializable {
                 }
                 break;
             case ACTUALIZAR:
-
                 actualizar();
                 btnEditar.setText("Editar");
                 btnReporte.setText("Reportes");
@@ -221,17 +213,13 @@ public class MenuComprasController implements Initializable {
 
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarCompra(?, ?, ?) }");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarCompras( ?, ?, ?) }");
             Compras registro = (Compras) tblCompras.getSelectionModel().getSelectedItem();
-            registro.setNumeroDocumento(Integer.parseInt(txtNumDoc.getText()));
-            LocalDate fechaN = txtfechaDoc.getValue();
-            Date fechaC = Date.valueOf(fechaN);
+            registro.setDescripcion(txtDescripcion.getText());
             procedimiento.setInt(1, registro.getNumeroDocumento());
-            procedimiento.setDate(2, fechaC);
-            procedimiento.setString(3, registro.getDescripcion());
-            procedimiento.setDouble(4, registro.getTotalDocumento());
-            procedimiento.execute();
-
+            procedimiento.setString(2, registro.getDescripcion());
+            procedimiento.setDouble(3, registro.getTotalDocumento());
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -256,7 +244,6 @@ public class MenuComprasController implements Initializable {
         txtNumDoc.setEditable(false);
         txtfechaDoc.setEditable(false);
         txtDescripcion.setEditable(false);
-        txttotalDoc.setEditable(false);
 
     }
 
@@ -264,7 +251,6 @@ public class MenuComprasController implements Initializable {
         txtNumDoc.setEditable(true);
         txtfechaDoc.setEditable(true);
         txtDescripcion.setEditable(true);
-        txttotalDoc.setEditable(true);
     }
 
     public void limpiarControles() {
@@ -273,23 +259,17 @@ public class MenuComprasController implements Initializable {
         txttotalDoc.clear();
     }
 
-    public Main getEscenarioPrincipal() {
-        return escenarioPrincipal;
+    public Main getEscenarioPrincipalCompras() {
+        return escenarioPrincipalCompras;
     }
-
-    public void setEscenarioPrincipal(Main escenarioPrincipal) {
-        this.escenarioPrincipal = escenarioPrincipal;
+    public void setEscenarioPrincipalCompras(Main escenarioPrincipalCompras) {
+        this.escenarioPrincipalCompras = escenarioPrincipalCompras;
     }
-
-    
 
     public void clickAtras(ActionEvent event) throws IOException {
         if (event.getSource() == btnBack) {
-            escenarioPrincipal.menuPrincipalView();
+            escenarioPrincipalCompras.menuPrincipalView();
         
         }
     }
 }
-
-    
-
