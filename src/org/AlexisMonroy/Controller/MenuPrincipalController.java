@@ -22,6 +22,7 @@ public class MenuPrincipalController implements Initializable  {
     @FXML MenuItem btnProgramador;
     @FXML MenuItem btnProveedores;
     @FXML MenuItem btnTipoProducto;
+    @FXML MenuItem btnCompras;
    
  
     @Override
@@ -46,6 +47,8 @@ public class MenuPrincipalController implements Initializable  {
             escenarioPrincipal.ProveedorView();
         }else if (event.getSource() == btnTipoProducto){
             escenarioPrincipal.TipoProductoView();
+        }else if (event.getSource() == btnCompras){
+            escenarioPrincipal.MenuComprasView();
         }
     }
 }

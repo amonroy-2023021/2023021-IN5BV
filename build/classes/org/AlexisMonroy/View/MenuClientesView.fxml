@@ -41,7 +41,7 @@
                   <String fx:value="button3" />
                   <String fx:value="button1" />
                </styleClass></Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Reporte" GridPane.rowIndex="3">
+            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Reporte" GridPane.rowIndex="3">
                <styleClass>
                   <String fx:value="button3" />
                   <String fx:value="button1" />
@@ -66,7 +66,7 @@
                   <Image url="@../images/Editar.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgReporte" fitHeight="63.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+            <ImageView fx:id="imgReportes" fitHeight="63.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/reporte.png" />
                </image>
@@ -88,10 +88,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="txtApellido" GridPane.columnIndex="3" />
-            <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtCodP" GridPane.columnIndex="1" />
             <TextField fx:id="txtNIT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtApellido" GridPane.columnIndex="3" />
             <TextField fx:id="txtDireccion" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="txtCorreo" GridPane.columnIndex="5" />
             <Label prefHeight="34.0" prefWidth="88.0" text="Telefono" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -121,9 +121,9 @@
             <String fx:value="button1" />
          </styleClass>
          <graphic>
-            <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgBack" fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/regresar.png" />
+                  <Image url="@../images/regresar.png" />
                </image>
             </ImageView>
          </graphic>

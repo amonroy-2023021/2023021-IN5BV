@@ -50,7 +50,6 @@ create table Proveedores(
     direccionProveedor varchar(150) not null,
     razonSocial varchar(60) not null,
     contactoPrincipal varchar(100) not null,
-    paginaWeb varchar(50) not null,
     primary key PK_codigoProveedor(codigoProveedor)
 );
 
@@ -90,7 +89,7 @@ create table TipoProducto(
 );
 
 create table Productos(
-	codigoProducto varchar(15) not null,
+    codigoProducto varchar(15) not null,
     descripcionProducto varchar(45) not null,
     precioUnitario decimal(10,2),
     precioDocena decimal(10,2),
@@ -101,7 +100,7 @@ create table Productos(
     Proveedores_codigoProveedor int not null,
     primary key PK_codigoProducto(codigoProducto),
     constraint FK_Productos_TipoProducto foreign key Productos(TipoProducto_codigoTipoProducto)
-		references TipoProducto(codigoTipoProducto),
+    references TipoProducto(codigoTipoProducto),
     constraint FK_Productos_Proveedores foreign key Productos(Proveedores_codigoProveedor)
 		references Proveedores(codigoProveedor)
 );
@@ -236,8 +235,8 @@ Delimiter ;
 
 Delimiter $$
 
-	create procedure sp_EditarClientes(in codCli int,in nCliente varchar(10), in nomClientes varchar(50), in apCliente varchar(50),
-			in direcCliente varchar(150), in telCliente varchar(15), in corrCliente varchar(45))
+	create procedure sp_EditarClientes(in nCliente varchar(10), in nomClientes varchar(50), in apCliente varchar(50), in direcCliente varchar(150),
+ in telCliente varchar(15), in corrCliente varchar(45))
 		Begin
 			Update Clientes C
 				set
@@ -305,7 +304,6 @@ Delimiter $$
     in direccionProveedor varchar(150),
     in razonSocial varchar(60),
     in contactoPrincipal varchar(100),
-    in paginaWeb varchar(50))
 		Begin
 			Insert into Proveedores(
 			NITproveedor,
@@ -320,8 +318,7 @@ Delimiter $$
 			apellidoProveedor,
 			direccionProveedor,
 			razonSocial,
-            contactoPrincipal,
-			paginaWeb);
+            contactoPrincipal);
             
 		End $$
     
@@ -341,7 +338,6 @@ Delimiter $$
 			P.direccionProveedor,
 			P.razonSocial,
             P.contactoPrincipal,
-			P.paginaWeb
             from Proveedores P;
         End $$
         
@@ -361,7 +357,6 @@ Delimiter $$
 			P.direccionProveedor,
 			P.razonSocial,
             P.contactoPrincipal,
-			P.paginaWeb
             from Proveedores P
             where codigoProveedor = codPro;
         End $$
@@ -385,7 +380,7 @@ Delimiter ;
 Delimiter $$
 
 	create procedure sp_EditarProveedores(in codPro int,in nPro varchar(10), in nomPro varchar(60), in apPro varchar(60),
-			in direcPro varchar(150), in raSocial varchar(60), in conPrin varchar(100), in pagWeb varchar(50))
+			in direcPro varchar(150), in raSocial varchar(60), in conPrin varchar(100))
 		Begin
 			Update Proveedores P
 				set
@@ -395,7 +390,6 @@ Delimiter $$
 				P.direccionProveedor = direcPro,
 				P.razonSocial = raSocial,
 				P.contactoPrincipal = conPrin,
-                P.paginaWeb = pagWeb
                 where codigoProveedor = codPro;
 		End $$
         
@@ -407,8 +401,8 @@ Delimiter ;
 
 -- Agregar proveedores --
 
-call sp_AgregarProveedores('114006350', 'Al', 'Causa', 'Zona 7', 'TechSolutions S.A. de C.V.', 'Cesar García','www.innovatetechsolutions.com');
-call sp_AgregarProveedores('949474654', 'Mo', 'asd', 'Zona 8', 'GlobalTech Solutions, Inc.', 'Tulio Ortiz','www.succionaproblemas.com');
+call sp_AgregarProveedores('114006350', 'Al', 'Causa', 'Zona 7', 'TechSolutions S.A. de C.V.', 'Cesar García');
+call sp_AgregarProveedores('949474654', 'Mo', 'asd', 'Zona 8', 'GlobalTech Solutions, Inc.', 'Tulio Ortiz');
 
 -- Listar proveedores --
 
@@ -428,7 +422,7 @@ call sp_EliminarProveedores(1);
 
 -- Editar proveedor --
 
-call sp_EditarProveedores(2, '000000000', 'Alexis', 'was', 'Zona 10', 'Manimalista S.A.', 'Randy Rivas','www.manimalista.com');
+call sp_EditarProveedores(2, '000000000', 'Alexis', 'was', 'Zona 10', 'Manimalista S.A.', 'Randy Rivas');
 
 	-- Comprobacion --
     
@@ -515,14 +509,7 @@ Delimiter $$
 		End $$
 Delimiter ;
 
--- Reinicar contador ID Empleados --
 
-Delimiter $$
-	create procedure sp_reinicioIdCompras()
-		Begin
-			alter table Compras auto_increment = 1;
-		End $$
-Delimiter ;
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 -- -- Llamado de procedimientos almacenados -- --
@@ -566,10 +553,13 @@ call sp_EditarCompras(2, '2002-02-12', 'cd 2.0', 3000.00);
 Delimiter $$
 
 	create procedure sp_AgregarTipoProductos(
+    in codigoTipoProducto int,
     in descripcion varchar(45))
 		Begin
 			Insert into TipoProducto(
+                        codigoTipoProducto,
 			descripcion) values (
+                        codigoTipoProducto,
 			descripcion);
 		End $$
     
@@ -624,21 +614,13 @@ Delimiter $$
 		End $$
 Delimiter ;
 
--- Reinicar contador ID Empleados --
-
-Delimiter $$
-	create procedure sp_reinicioIdTipoProductos()
-		Begin
-			alter table TipoProducto auto_increment = 1;
-		End $$
-Delimiter ;
 
 
 
 -- Agregar tipo de productos --
 
-call sp_AgregarTipoProductos('Es de un tipo indestructible');
-call sp_AgregarTipoProductos('Se considera peligroso');
+call sp_AgregarTipoProductos(1, 'Es de un tipo indestructible');
+call sp_AgregarTipoProductos(2, 'Se considera peligroso');
 
 -- Listar clientes --
 

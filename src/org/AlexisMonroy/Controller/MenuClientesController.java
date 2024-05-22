@@ -38,32 +38,24 @@ public class MenuClientesController implements Initializable {
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
     private ObservableList<Clientes> listarClientes;
     
-    /*Botones*/
     @FXML private Button btnRegresar;
     @FXML private Button btnAgregar;
     @FXML private Button btnEliminar;
     @FXML private Button btnEditar;
     @FXML private Button btnReportes;
-    
-    /*Imagenes*/
     @FXML private ImageView imgAgregar;
     @FXML private ImageView imgEliminar;
     @FXML private ImageView imgEditar;
     @FXML private ImageView imgReportes;
-    
-    /*Textos*/
-        @FXML private TextField txtCodP;
+    @FXML private ImageView imgBack;
+    @FXML private TextField txtCodP;
     @FXML private TextField txtNombre;
     @FXML private TextField txtApellido;
     @FXML private TextField txtTelefono;
     @FXML private TextField txtCorreo;
     @FXML private TextField txtDireccion;
     @FXML private TextField txtNIT;
-    
-    /*Tabla*/
     @FXML private TableView tblClientes;
-    
-    /*Columnas*/
     @FXML private TableColumn colCodigoC;
     @FXML private TableColumn colNITC;
     @FXML private TableColumn colNombreC;
@@ -94,11 +86,11 @@ public class MenuClientesController implements Initializable {
     
     public void selecionarElemento(){
         txtCodP.setText(String.valueOf(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getCodigoCliente()));
+        txtNIT.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getNITcliente());
         txtNombre.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getNombreCliente());
         txtApellido.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getApellidoCliente());
-        txtNIT.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getNITcliente());
-        txtTelefono.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getTelefonoCliente());
         txtDireccion.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getDireccionCliente());
+        txtTelefono.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getTelefonoCliente());
         txtCorreo.setText(((Clientes)tblClientes.getSelectionModel().getSelectedItem()).getCorreoCliente());
     }
     
@@ -241,18 +233,13 @@ public class MenuClientesController implements Initializable {
         switch(tipoDeOperaciones){
             case NINGUNO:
                 if(tblClientes.getSelectionModel().getSelectedItem() !=null){
-                    txtNombre.setDisable(false);
-                    txtApellido.setDisable(false);
-                    txtTelefono.setDisable(false);
-                    txtCorreo.setDisable(false);
-                    txtDireccion.setDisable(false);
-                    txtNIT.setDisable(false);
                     btnEditar.setText("Actualizar");
                     btnReportes.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
-                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/Editar.png"));
+                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
                     imgReportes.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
+                    txtCodP.setEditable(false);
                     activarControles();
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else{
@@ -271,12 +258,6 @@ public class MenuClientesController implements Initializable {
                 limpiarControles();
                 tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
-                txtNombre.setDisable(true);
-                txtApellido.setDisable(true);
-                txtTelefono.setDisable(true);
-                txtCorreo.setDisable(true);
-                txtDireccion.setDisable(true);
-                txtNIT.setDisable(true);
                 break;
         }
     }
@@ -284,12 +265,6 @@ public class MenuClientesController implements Initializable {
     public void reportes(){
         switch(tipoDeOperaciones){
             case ACTUALIZAR:
-                txtNombre.setDisable(true);
-                txtApellido.setDisable(true);
-                txtTelefono.setDisable(true);
-                txtCorreo.setDisable(true);
-                txtDireccion.setDisable(true);
-                txtNIT.setDisable(true);
                 desactivarControles();
                 limpiarControles();
                 btnEditar.setText("Editar");
@@ -307,24 +282,20 @@ public class MenuClientesController implements Initializable {
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarClientes(?, ?, ?, ?, ?, ?, ?)}");
             Clientes registro = (Clientes)tblClientes.getSelectionModel().getSelectedItem();
-            
+            registro.setNITcliente(txtNIT.getText());
             registro.setNombreCliente(txtNombre.getText());
             registro.setApellidoCliente(txtApellido.getText());
-            registro.setNITcliente(txtNIT.getText());
             registro.setTelefonoCliente(txtTelefono.getText());
             registro.setDireccionCliente(txtDireccion.getText());
             registro.setCorreoCliente(txtCorreo.getText());
-            
             procedimiento.setInt(1, registro.getCodigoCliente());
-            procedimiento.setString(2, registro.getNombreCliente());
-            procedimiento.setString(3, registro.getApellidoCliente());
-            procedimiento.setString(4, registro.getNITcliente());
+            procedimiento.setString(2, registro.getNITcliente());
+            procedimiento.setString(3, registro.getNombreCliente());
+            procedimiento.setString(4, registro.getApellidoCliente());
             procedimiento.setString(5, registro.getTelefonoCliente());
             procedimiento.setString(6, registro.getDireccionCliente());
             procedimiento.setString(7, registro.getCorreoCliente());
             procedimiento.execute();
-
-            listarClientes.add(registro);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -369,6 +340,9 @@ public class MenuClientesController implements Initializable {
     public void clickMenuPrincipal(ActionEvent event){
         if(event.getSource() == btnRegresar){
             escenarioPrincipalClientes.menuPrincipalView();
+        }else if (event.getSource() == imgBack){
+            escenarioPrincipalClientes.menuPrincipalView();
         }
+
     }
 }

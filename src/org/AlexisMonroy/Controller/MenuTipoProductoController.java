@@ -37,7 +37,6 @@ public class MenuTipoProductoController implements Initializable {
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
     private ObservableList<TipoProducto> listaTipoProducto;
     @FXML private Button btnBack;
-    @FXML private ImageView imgBack;
     @FXML private TextField txtCodTipoPro;
     @FXML private TextField txtDescripcion;
     @FXML private TableView tblTipoProducto;
@@ -102,8 +101,8 @@ public class MenuTipoProductoController implements Initializable {
                 btnEliminar.setText("Cancelar");
                 btnEditar.setDisable(true);
                 btnReporte.setDisable(true);
-                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/guardarPro.png"));
-                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/cancelarPro.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -181,23 +180,22 @@ public class MenuTipoProductoController implements Initializable {
                     btnReporte.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
-                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarPro.png"));
-                    imgReporte.setImage(new Image("/org/AlexisMonroy/images/cancelarPro.png"));
+                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                    imgReporte.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                     activarControles();
-                    txtDescripcion.setEditable(false);
+                    txtCodTipoPro.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
                 }else
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un Elemento");
                 break;
             case ACTUALIZAR:
-                
                 actualizar();
                 btnEditar.setText("Editar");
-                btnReporte.setText("Reportes");
+                btnReporte.setText("cancelar");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
-                imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarPro.png"));
-                imgReporte.setImage(new Image("/org/AlexisMonroy/images/ReportPro.png"));
+                imgEditar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                imgReporte.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                 desactivarControles();
                 tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
@@ -206,9 +204,8 @@ public class MenuTipoProductoController implements Initializable {
     
     public void actualizar(){
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarTipoProductos( ?, ?) }");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarTipoProductos(?, ?) }");
             TipoProducto registro = (TipoProducto) tblTipoProducto.getSelectionModel().getSelectedItem();
-            registro.setCodigoTipoProducto(Integer.parseInt(txtCodTipoPro.getText()));
             registro.setDescripcion(txtDescripcion.getText());
             procedimiento.setInt(1, registro.getCodigoTipoProducto());
             procedimiento.setString(2, registro.getDescripcion());

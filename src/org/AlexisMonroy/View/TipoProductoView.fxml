@@ -38,13 +38,13 @@
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Eliminar" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Eliminar" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Editar" GridPane.rowIndex="2">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Editar" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
@@ -56,22 +56,22 @@
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <ImageView fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgAgregar" fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/AgregarPro.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView fx:id="imgEliminar" fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/EliminarPro.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <ImageView fx:id="imgEditar" fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/editarPro.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+            <ImageView fx:id="imgReporte" fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/ReportPro.png" />
                </image>
@@ -94,11 +94,24 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Descripcion" />
-            <TextField fx:id="txtDescripcion" GridPane.columnIndex="1" />
-            <TextField fx:id="txtCodTipoPro" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="CodigoTipo" GridPane.rowIndex="1" />
+            <Label text="Descripcion" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCodTipoPro" GridPane.columnIndex="1" />
+            <Label text="CodigoTipo" />
+            <TextField fx:id="txtDescripcion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Button fx:id="btnBack" layoutX="626.0" layoutY="24.0" mnemonicParsing="false" onAction="#clickAtras" stylesheets="@../resources/Botones.css" text="regresar">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/regresar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="button1" />
+            <String fx:value="button3" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>
