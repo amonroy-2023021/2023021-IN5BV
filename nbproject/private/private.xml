@@ -4,10 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/System/Main.java</file>
-            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/Controller/MenuProveedoresController.java</file>
-            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/Controller/MenuComprasController.java</file>
+            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/bean/Cargos.java</file>
+            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/Controller/MenuEmpleadosController.java</file>
             <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/database/MiniMarketdb.sql</file>
-            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/View/MenuComprasView.fxml</file>
+            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/bean/Empleados.java</file>
+            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/Controller/MenuPrincipalController.java</file>
+            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/Controller/MenuClientesController.java</file>
+            <file>file:/C:/Users/Dell/Downloads/Ejemplo1/src/org/AlexisMonroy/Controller/MenuCargosController.java</file>
         </group>
     </open-files>
 </project-private>

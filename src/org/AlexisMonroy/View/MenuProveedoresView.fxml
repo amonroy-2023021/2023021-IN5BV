@@ -100,17 +100,17 @@
          </rowConstraints>
          <children>
             <TextField fx:id="txtDireccionP" GridPane.columnIndex="5" />
-            <TextField fx:id="txtContactoP" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="txtContactoP" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="txtNitP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtNombreP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtApellidoP" GridPane.columnIndex="3" />
             <Label text="NIT Proveedor" GridPane.rowIndex="1" />
-            <Label text="Contacto Prov" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Contacto Prov" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="Direccion" GridPane.columnIndex="4" />
             <Label text="Nombre" GridPane.rowIndex="2" />
             <Label text="Apellido" GridPane.columnIndex="2" />
-            <Label text="Razon Social" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="txtRazonP" layoutX="277.0" layoutY="16.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label text="Razon Social" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtRazonP" layoutX="277.0" layoutY="16.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label text="Codigo proveedor" />
             <TextField fx:id="txtCodigoP" GridPane.columnIndex="1" />
          </children>

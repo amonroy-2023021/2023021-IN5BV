@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.AlexisMonroy.Controller.MenuCargosController;
 import org.AlexisMonroy.Controller.MenuClientesController;
 import org.AlexisMonroy.Controller.MenuComprasController;
+import org.AlexisMonroy.Controller.MenuEmpleadosController;
 import org.AlexisMonroy.Controller.MenuPrincipalController;
 import org.AlexisMonroy.Controller.MenuProductosController;
 import org.AlexisMonroy.Controller.ProgramadorController;
@@ -126,9 +127,15 @@ public class Main extends Application {
             e.printStackTrace();
             }
     }
+    public void EmpleadosView(){
+            try{
+                MenuEmpleadosController MenuEmpleadosView = (MenuEmpleadosController)cambiarEscena("MenuEmpleadosView.fxml", 950,535);
+                MenuEmpleadosView.setEscenarioPrincipalEmpleados(this);
+            }catch(Exception e){
+            e.printStackTrace();
+            }
     
-    public static void main(String[] args) {
-        launch(args);
+   
     }
     
 }
