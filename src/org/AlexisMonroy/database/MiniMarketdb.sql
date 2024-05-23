@@ -49,7 +49,7 @@ create table Proveedores(
     apellidoProveedor varchar(60) not null,
     direccionProveedor varchar(150) not null,
     razonSocial varchar(60) not null,
-    contactoPrincipal varchar(100) not null,
+    contactoProveedor varchar(100) not null,
     primary key PK_codigoProveedor(codigoProveedor)
 );
 
@@ -94,7 +94,6 @@ create table Productos(
     precioUnitario decimal(10,2),
     precioDocena decimal(10,2),
     precioMayor decimal(10,2),
-    imagenProducto varchar(45),
     existencia int,
     TipoProducto_codigoTipoProducto int not null,
     Proveedores_codigoProveedor int not null,
@@ -303,7 +302,7 @@ Delimiter $$
     in apellidoProveedor varchar(60),
     in direccionProveedor varchar(150),
     in razonSocial varchar(60),
-    in contactoPrincipal varchar(100),
+    in contactoProveedor varchar(100),
 		Begin
 			Insert into Proveedores(
 			NITproveedor,
@@ -311,14 +310,14 @@ Delimiter $$
 			apellidoProveedor,
 			direccionProveedor,
 			razonSocial,
-            contactoPrincipal,
+            contactoProveedor,
 			paginaWeb) values (
 			NITproveedor,
 			nombreProveedor,
 			apellidoProveedor,
 			direccionProveedor,
 			razonSocial,
-            contactoPrincipal);
+            contactoProveedor);
             
 		End $$
     
@@ -337,7 +336,7 @@ Delimiter $$
 			P.apellidoProveedor,
 			P.direccionProveedor,
 			P.razonSocial,
-            P.contactoPrincipal,
+            P.contactoProveedores,
             from Proveedores P;
         End $$
         
@@ -356,7 +355,7 @@ Delimiter $$
 			P.apellidoProveedor,
 			P.direccionProveedor,
 			P.razonSocial,
-            P.contactoPrincipal,
+            P.contactoProveedores,
             from Proveedores P
             where codigoProveedor = codPro;
         End $$
@@ -389,7 +388,7 @@ Delimiter $$
 				P.apellidoProveedor = apPro,
 				P.direccionProveedor = direcPro,
 				P.razonSocial = raSocial,
-				P.contactoPrincipal = conPrin,
+				P.contactoProveedor = conPrin,
                 where codigoProveedor = codPro;
 		End $$
         

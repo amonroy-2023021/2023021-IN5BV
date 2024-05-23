@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.AlexisMonroy.Controller;
 
 import java.io.IOException;
@@ -21,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.AlexisMonroy.DB.Conexion;
@@ -102,8 +99,8 @@ public class MenuCargosController implements Initializable {
                 btnEliminar.setText("Cancelar");
                 btnEditar.setDisable(true);
                 btnReporte.setDisable(true);
-                imgAgregar.setImage(new Images("/org/AlexisMonroy/images/guardar.png"));
-                imgEliminar.setImage(new Images("/org/AlexisMonroy/images/cancelar.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
