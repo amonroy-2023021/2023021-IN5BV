@@ -88,7 +88,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="btnBack" layoutX="588.0" layoutY="43.0" mnemonicParsing="false" onAction="#clickAtras" stylesheets="@../resources/Botones.css" text="Button">
+      <Button fx:id="btnBack" layoutX="588.0" layoutY="43.0" mnemonicParsing="false" onAction="#clickAtras" stylesheets="@../resources/Botones.css" text="Regresar">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.AlexisMonroy.Controller.MenuCargosController;
 import org.AlexisMonroy.Controller.MenuClientesController;
 import org.AlexisMonroy.Controller.MenuComprasController;
 import org.AlexisMonroy.Controller.MenuPrincipalController;
@@ -112,6 +113,15 @@ public class Main extends Application {
             try{
                 MenuProductosController MenuProductosView = (MenuProductosController)cambiarEscena("MenuProductosView.fxml", 876,493);
                 MenuProductosView.setEscenarioPrincipalProductos(this);
+            }catch(Exception e){
+            e.printStackTrace();
+            }
+    }
+    
+    public void CargosView(){
+            try{
+                MenuCargosController MenuCargosView = (MenuCargosController)cambiarEscena("MenuCargosView.fxml", 876,493);
+                MenuCargosView.setEscenarioPrincipalCargos(this);
             }catch(Exception e){
             e.printStackTrace();
             }

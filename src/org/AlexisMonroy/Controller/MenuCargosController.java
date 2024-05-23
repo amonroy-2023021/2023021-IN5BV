@@ -29,14 +29,13 @@ import org.AlexisMonroy.bean.Cargos;
  * @author Dell
  */
 public class MenuCargosController implements Initializable {
-
     private Main escenarioPrincipalCargos;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cargarDatos();
     }
-
+    
     private enum operaciones {
         AGREGAR, ELIMINAR, EDITAR, ACTUALIZAR, CANCELAR, NINGUNO
     }
@@ -61,7 +60,7 @@ public class MenuCargosController implements Initializable {
 
     public void cargarDatos() {
         tblCargos.setItems(getCargos());
-        colCargoEmp.setCellValueFactory(new PropertyValueFactory<Cargos, Integer>("cargoEmpleado"));
+        colCargoEmp.setCellValueFactory(new PropertyValueFactory<Cargos, Integer>("codigoCargoEmpleado"));
         colNombreCargo.setCellValueFactory(new PropertyValueFactory<Cargos, String>("nombreCargo"));
         colDescripcionCargo.setCellValueFactory(new PropertyValueFactory<Cargos, String>("descripcionCargo"));
     }
@@ -75,10 +74,10 @@ public class MenuCargosController implements Initializable {
     public ObservableList<Cargos> getCargos() {
         ArrayList<Cargos> lista = new ArrayList<>();
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_listarCargos()}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ListarCargoEmpleado()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
-                lista.add(new Cargos(resultado.getInt("cargoEmpleado"),
+                lista.add(new Cargos(resultado.getInt("codigoCargoEmpleado"),
                         resultado.getString("nombreCargo"),
                         resultado.getString("descripcionCargo")
                 ));
@@ -111,8 +110,8 @@ public class MenuCargosController implements Initializable {
                 btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/AgregarC.png"));
-                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/EliminarC.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/Agregar.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/Eliminar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
@@ -125,7 +124,7 @@ public class MenuCargosController implements Initializable {
         registro.setNombreCargo(txtNombreCargo.getText());
         registro.setDescripcionCargo(txtDescripcionC.getText());
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_agregarCargo(?, ? , ?) }");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarCargoEmpleado(?, ? , ?) }");
             procedimiento.setInt(1, registro.getCodigoCargoEmpleado());
             procedimiento.setString(2, registro.getNombreCargo());
             procedimiento.setString(3, registro.getDescripcionCargo());
@@ -145,8 +144,8 @@ public class MenuCargosController implements Initializable {
                 btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/AgregarC.png"));
-                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/EliminarC.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/Agregar.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/Eliminar.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -154,7 +153,7 @@ public class MenuCargosController implements Initializable {
                     int respuesta = JOptionPane.showConfirmDialog(null, "Confirmar si elimina el registro", "Eliminar Cargos", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (respuesta == JOptionPane.YES_NO_OPTION) {
                         try {
-                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EliminarClientes(?) }");
+                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EliminarCargoEmpleado(?) }");
                             procedimiento.setInt(1, ((Cargos) tblCargos.getSelectionModel().getSelectedItem()).getCodigoCargoEmpleado());
                             procedimiento.execute();
                             listaCargos.remove(tblCargos.getSelectionModel().getSelectedItem());
@@ -177,8 +176,8 @@ public class MenuCargosController implements Initializable {
                     btnReporte.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
-                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/Guardar.png"));
-                    imgReporte.setImage(new Image("/org/AlexisMonroy/images/Reportes.png"));
+                    imgEditar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
+                    imgReporte.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                     activarControles();
                     txtCargoEmp.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
@@ -192,8 +191,8 @@ public class MenuCargosController implements Initializable {
                 btnReporte.setText("Reportes");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
-                imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarC.png"));
-                imgReporte.setImage(new Image("/org/AlexisMonroy/images/Reportes.png"));
+                imgEditar.setImage(new Image("/org/AlexisMonroy/images/Editar.png"));
+                imgReporte.setImage(new Image("/org/AlexisMonroy/images/reporte.png"));
                 desactivarControles();
                 tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
@@ -202,7 +201,7 @@ public class MenuCargosController implements Initializable {
 
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_editarCargo(?, ?, ?) }");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_EditarCargoEmpleado(?, ?, ?) }");
             Cargos registro = (Cargos) tblCargos.getSelectionModel().getSelectedItem();
             registro.setCodigoCargoEmpleado(Integer.parseInt(txtCargoEmp.getText()));
             registro.setNombreCargo(txtNombreCargo.getText());
@@ -225,8 +224,8 @@ public class MenuCargosController implements Initializable {
                 btnReporte.setText("Reporte");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
-                imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarC.png"));
-                imgReporte.setImage(new Image("/org/AlexisMonroy/images/Reportes.png"));
+                imgEditar.setImage(new Image("/org/AlexisMonroy/images/Editar.png"));
+                imgReporte.setImage(new Image("/org/AlexisMonroy/images/reporte.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
         }
     }
@@ -252,13 +251,15 @@ public class MenuCargosController implements Initializable {
 
     }
 
-    public Main getEscenarioPrincipal() {
+    public Main getEscenarioPrincipalCargos() {
         return escenarioPrincipalCargos;
     }
 
-    public void setEscenarioPrincipal(Main escenarioPrincipal) {
-        this.escenarioPrincipalCargos = escenarioPrincipal;
+    public void setEscenarioPrincipalCargos(Main escenarioPrincipalCargos) {
+        this.escenarioPrincipalCargos = escenarioPrincipalCargos;
     }
+
+    
     
      public void clickAtras (ActionEvent event) throws IOException{
         if(event.getSource() == btnBack){
