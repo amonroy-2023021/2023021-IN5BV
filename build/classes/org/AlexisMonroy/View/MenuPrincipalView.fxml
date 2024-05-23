@@ -24,10 +24,11 @@
           <Menu mnemonicParsing="false" text="Modulo">
             <items>
                   <MenuItem fx:id="btnTipoProducto" mnemonicParsing="false" onAction="#buttonHandleEvent" text="TiposProducto" />
-              <MenuItem mnemonicParsing="false" text="Productos" />
+              <MenuItem fx:id="btnProductos" mnemonicParsing="false" onAction="#buttonHandleEvent" text="Productos" />
                   <MenuItem fx:id="btnProveedores" mnemonicParsing="false" onAction="#buttonHandleEvent" text="Proovedores" />
                   <MenuItem fx:id="btnMenuClientes" mnemonicParsing="false" onAction="#buttonHandleEvent" text="Clientes" />
                   <MenuItem fx:id="btnCompras" mnemonicParsing="false" onAction="#buttonHandleEvent" text="Compras" />
+                  <MenuItem mnemonicParsing="false" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Reportes">

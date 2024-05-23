@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.AlexisMonroy.Controller.MenuClientesController;
 import org.AlexisMonroy.Controller.MenuComprasController;
 import org.AlexisMonroy.Controller.MenuPrincipalController;
+import org.AlexisMonroy.Controller.MenuProductosController;
 import org.AlexisMonroy.Controller.ProgramadorController;
 import org.AlexisMonroy.Controller.MenuProveedoresController;
 import org.AlexisMonroy.Controller.MenuTipoProductoController;
@@ -71,8 +72,7 @@ public class Main extends Application {
     
     public void ProveedorView(){
             try{
-                MenuProveedoresController MenuProveedoresView = (MenuProveedoresController)cambiarEscena
-                ("MenuProveedoresView.fxml", 1181,665);
+                MenuProveedoresController MenuProveedoresView = (MenuProveedoresController)cambiarEscena("MenuProveedoresView.fxml", 950,535);
                 MenuProveedoresView.setSetEscenarioPrincipalProveedores(this);
             }catch(Exception e){
             e.printStackTrace();
@@ -106,6 +106,15 @@ public class Main extends Application {
             e.printStackTrace();
         }
     
+    }
+    
+    public void ProductosView(){
+            try{
+                MenuProductosController MenuProductosView = (MenuProductosController)cambiarEscena("MenuProductosView.fxml", 876,493);
+                MenuProductosView.setEscenarioPrincipalProductos(this);
+            }catch(Exception e){
+            e.printStackTrace();
+            }
     }
     
     public static void main(String[] args) {

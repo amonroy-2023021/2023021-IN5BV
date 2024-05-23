@@ -31,7 +31,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="agregar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Agregar">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Agregar">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
@@ -43,7 +43,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="eliminar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Eliminar" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Eliminar" GridPane.rowIndex="1">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
@@ -56,7 +56,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="editar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Editar" GridPane.rowIndex="2">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Editar" GridPane.rowIndex="2">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
@@ -69,13 +69,13 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnReportes" mnemonicParsing="false" onAction="#reportes" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Reporte" GridPane.rowIndex="3">
+            <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#reporte" prefHeight="200.0" prefWidth="200.0" stylesheets="@../resources/Botones.css" text="Reporte" GridPane.rowIndex="3">
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
                </styleClass>
                <graphic>
-                  <ImageView fx:id="imgReportes" fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgReporte" fitHeight="43.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/ReporteProv.png" />
                      </image>
@@ -84,7 +84,7 @@
             </Button>
          </children>
       </GridPane>
-      <GridPane layoutX="346.0" layoutY="186.0" prefHeight="98.0" prefWidth="536.0">
+      <GridPane layoutX="348.0" layoutY="185.0" prefHeight="98.0" prefWidth="536.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -99,14 +99,14 @@
             <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtContactoP" GridPane.columnIndex="5" />
-            <TextField fx:id="txtDireccionP" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="txtDireccionP" GridPane.columnIndex="5" />
+            <TextField fx:id="txtContactoP" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField fx:id="txtNitP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtNombreP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtApellidoP" GridPane.columnIndex="3" />
             <Label text="NIT Proveedor" GridPane.rowIndex="1" />
-            <Label text="Contacto Prov" GridPane.columnIndex="4" />
-            <Label text="Direccion" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Contacto Prov" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Direccion" GridPane.columnIndex="4" />
             <Label text="Nombre" GridPane.rowIndex="2" />
             <Label text="Apellido" GridPane.columnIndex="2" />
             <Label text="Razon Social" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -115,18 +115,18 @@
             <TextField fx:id="txtCodigoP" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="tblProveedores" layoutX="240.0" layoutY="308.0" onMouseClicked="selecionarElemento" prefHeight="226.0" prefWidth="704.0">
+      <TableView fx:id="tblProveedores" layoutX="240.0" layoutY="308.0" prefHeight="226.0" prefWidth="704.0">
          <columns>
             <TableColumn fx:id="colCodigoP" minWidth="84.0" prefWidth="108.0" text="codigoProveedor" />
             <TableColumn fx:id="colNitP" minWidth="84.0" prefWidth="97.0" text="NITProveedor" />
-            <TableColumn fx:id="colNombreP" minWidth="78.0" prefWidth="94.0" text="nombresProveedor" />
-            <TableColumn fx:id="colApellidoP" minWidth="84.0" prefWidth="85.0" text="apellidosProveedor" />
-            <TableColumn fx:id="colDireccionP" minWidth="71.0" prefWidth="71.0" text="direccionProveedor" />
-            <TableColumn fx:id="colRazonP" minWidth="84.0" prefWidth="103.0" text="razonSocial" />
-            <TableColumn fx:id="colContactoP" prefWidth="145.0" text="contactoPrincipal" />
+            <TableColumn fx:id="colNombreP" minWidth="78.0" prefWidth="94.0" text="nombreProveedor" />
+            <TableColumn fx:id="colApellidoP" minWidth="84.0" prefWidth="85.0" text="apellidoProveedor" />
+            <TableColumn fx:id="colRazonP" minWidth="80.0" text="razonSocial" />
+            <TableColumn fx:id="colContactoP" minWidth="71.0" prefWidth="94.0" text="contactoProveedor" />
+            <TableColumn fx:id="colDireccionP" prefWidth="145.0" text="direccionProveedor" />
          </columns>
       </TableView>
-      <Button fx:id="btnRegresarP" layoutX="694.0" layoutY="35.0" mnemonicParsing="false" onAction="clickMenuPrincipal" stylesheets="@../resources/Botones.css" text="Regresar">
+      <Button fx:id="btnRegresar3" layoutX="694.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleButtonAction" stylesheets="@../resources/Botones.css" text="Regresar">
          <graphic>
             <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>

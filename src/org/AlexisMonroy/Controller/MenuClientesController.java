@@ -116,13 +116,6 @@ public class MenuClientesController implements Initializable {
     }
 
     public void agregar(){
-        txtCodP.setDisable(false);
-        txtNombre.setDisable(false);
-        txtApellido.setDisable(false);
-        txtTelefono.setDisable(false);
-        txtCorreo.setDisable(false);
-        txtDireccion.setDisable(false);
-        txtNIT.setDisable(false);
         switch(tipoDeOperaciones){
             case NINGUNO:
                 activarControles();
@@ -147,13 +140,7 @@ public class MenuClientesController implements Initializable {
                 tipoDeOperaciones = operaciones.NINGUNO;
                 activarControles();
                 cargarDatos();
-                txtCodP.setDisable(true);
-                txtNombre.setDisable(true);
-                txtApellido.setDisable(true);
-                txtTelefono.setDisable(true);
-                txtCorreo.setDisable(true);
-                txtDireccion.setDisable(true);
-                txtNIT.setDisable(true);
+                
                 break;
         }
     }
@@ -320,6 +307,7 @@ public class MenuClientesController implements Initializable {
     }
     
     public void limpiarControles(){
+        txtCodP.clear();
         txtNombre.clear();
         txtApellido.clear();
         txtTelefono.clear();

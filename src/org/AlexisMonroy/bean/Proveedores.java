@@ -8,19 +8,19 @@ public class Proveedores {
     private String apellidoProveedor;
     private String direccionProveedor;
     private String razonSocial;
-    private String contactoProveedor;
+    private String contactoProveedores;
 
     public Proveedores() {
     }
 
-    public Proveedores(int codigoProveedor, String NITproveedor, String nombreProveedor, String apellidoProveedor, String direccionProveedor, String razonSocial, String contactoProveedor) {
+    public Proveedores(int codigoProveedor, String NITproveedor, String nombreProveedor, String apellidoProveedor, String direccionProveedor, String razonSocial, String contactoProveedores) {
         this.codigoProveedor = codigoProveedor;
         this.NITproveedor = NITproveedor;
         this.nombreProveedor = nombreProveedor;
         this.apellidoProveedor = apellidoProveedor;
         this.direccionProveedor = direccionProveedor;
         this.razonSocial = razonSocial;
-        this.contactoProveedor = contactoProveedor;
+        this.contactoProveedores = contactoProveedores;
     }
 
     public int getCodigoProveedor() {
@@ -72,10 +72,10 @@ public class Proveedores {
     }
 
     public String getContactoProveedor() {
-        return contactoProveedor;
+        return contactoProveedores;
     }
 
     public void setContactoProveedor(String contactoPrincipal) {
-        this.contactoProveedor = contactoPrincipal;
+        this.contactoProveedores = contactoPrincipal;
     }
 }

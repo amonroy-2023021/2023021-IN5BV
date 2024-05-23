@@ -5,9 +5,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import static javax.management.Query.value;
 import javax.swing.JOptionPane;
 import org.AlexisMonroy.bean.Proveedores;
 import org.AlexisMonroy.DB.Conexion;
@@ -59,23 +56,16 @@ public class MenuProveedoresController implements Initializable   {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarDatos();
-        txtCodigoP.setDisable(true);
-        txtNitP.setDisable(true);
-        txtNombreP.setDisable(true);
-        txtApellidoP.setDisable(true);
-        txtRazonP.setDisable(true);
-        txtContactoP.setDisable(true);
-        txtDireccionP.setDisable(true);
     }
     
     public void cargarDatos(){
        tblProveedores.setItems(getProveedores());
        colCodigoP.setCellValueFactory(new PropertyValueFactory<Proveedores, Integer>("codigoProveedor"));
-       colNitP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("NITProveedor"));
+       colNitP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("NITproveedor"));
        colNombreP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("nombreProveedor"));
        colApellidoP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("apellidoProveedor"));
+       colRazonP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("razonSocial"));       
        colContactoP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("contactoProveedor"));
-       colRazonP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("razonSocial"));
        colDireccionP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("direccionProveedor"));
     }
     
@@ -100,7 +90,7 @@ public class MenuProveedoresController implements Initializable   {
                                         resultado.getString("nombreProveedor"),
                                         resultado.getString("apellidoProveedor"),
                                         resultado.getString("razonSocial"),
-                                        resultado.getString("contactoProveedor"),
+                                        resultado.getString("contactoProveedores"),
                                         resultado.getString("direccionProveedor")
                 ));
             }
@@ -114,12 +104,12 @@ public class MenuProveedoresController implements Initializable   {
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 activarControles();
-                btnAgregar.setText("GUARDAR");
-                btnEliminar.setText("CANCELAR");
+                btnAgregar.setText("guardar");
+                btnEliminar.setText("cancelar");
                 btnEditar.setDisable(true);
                 btnReporte.setDisable(true);
                 imgAgregar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
-                imgEliminar.setImage(new Image("/org/AlexisMonroy/image/cancelar.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/cancelar.png"));
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -130,8 +120,8 @@ public class MenuProveedoresController implements Initializable   {
                 btnEliminar.setText("ELIMINAR");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/AlexisMonroy/image/AgregarProv.png"));
-                imgEliminar.setImage(new Image("/org/AlexisMonroy/image/EliminarProv.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/AgregarProv.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/EliminarProv.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -154,9 +144,9 @@ public class MenuProveedoresController implements Initializable   {
             procedimiento.setString(2, registro.getNITproveedor());
             procedimiento.setString(3, registro.getNombreProveedor());
             procedimiento.setString(4, registro.getApellidoProveedor());
-            procedimiento.setString(5, registro.getDireccionProveedor());
-            procedimiento.setString(6, registro.getRazonSocial());
-            procedimiento.setString(7, registro.getContactoProveedor());
+            procedimiento.setString(5, registro.getRazonSocial());
+            procedimiento.setString(6, registro.getContactoProveedor());
+            procedimiento.setString(7, registro.getDireccionProveedor());
             procedimiento.execute();
             listaProveedores.add(registro);
         }catch(Exception e){
@@ -173,8 +163,8 @@ public class MenuProveedoresController implements Initializable   {
                 btnEliminar.setText("ELIMINAR");
                 btnEditar.setDisable(false);
                 btnReporte.setDisable(false);
-                imgAgregar.setImage(new Image("/org/AlexisMonroy/image/AgregarProv.png"));
-                imgEliminar.setImage(new Image("/org/AlexisMonroy/image/EliminarProv.png"));
+                imgAgregar.setImage(new Image("/org/AlexisMonroy/images/AgregarProv.png"));
+                imgEliminar.setImage(new Image("/org/AlexisMonroy/images/EliminarProv.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -200,8 +190,8 @@ public class MenuProveedoresController implements Initializable   {
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 if (tblProveedores.getSelectionModel().getSelectedItem() != null) {
-                    btnEditar.setText("ACTUALIZAR");
-                    btnReporte.setText("CANCELAR");
+                    btnEditar.setText("actualizar");
+                    btnReporte.setText("cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     imgEditar.setImage(new Image("/org/AlexisMonroy/images/guardar.png"));
@@ -215,8 +205,8 @@ public class MenuProveedoresController implements Initializable   {
                 break;
             case ACTUALIZAR:
                 actualizar();
-                btnEditar.setText("EDITAR");
-                btnReporte.setText("REPORTES");
+                btnEditar.setText("Editar");
+                btnReporte.setText("reportes");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarProv.png"));
@@ -245,9 +235,9 @@ public class MenuProveedoresController implements Initializable   {
             procedimiento.setString(2, registro.getNITproveedor());
             procedimiento.setString(3, registro.getNombreProveedor());
             procedimiento.setString(4, registro.getApellidoProveedor());
-            procedimiento.setString(5, registro.getDireccionProveedor());
-            procedimiento.setString(6, registro.getRazonSocial());
-            procedimiento.setString(7, registro.getContactoProveedor());
+            procedimiento.setString(5, registro.getRazonSocial());            
+            procedimiento.setString(6, registro.getContactoProveedor());
+            procedimiento.setString(7, registro.getDireccionProveedor());
             procedimiento.execute();
             listaProveedores.add(registro);
         }catch(Exception e){

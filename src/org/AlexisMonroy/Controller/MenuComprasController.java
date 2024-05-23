@@ -256,7 +256,6 @@ public class MenuComprasController implements Initializable {
     public void limpiarControles() {
         txtNumDoc.clear();
         txtDescripcion.clear();
-        txttotalDoc.clear();
     }
 
     public Main getEscenarioPrincipalCompras() {
