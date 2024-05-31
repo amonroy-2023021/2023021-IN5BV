@@ -68,7 +68,6 @@ public class MenuProveedoresController implements Initializable   {
        colContactoP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("contactoProveedor"));
        colDireccionP.setCellValueFactory(new PropertyValueFactory<Proveedores, String>("direccionProveedor"));
     }
-    
     public void seleccionarElemento(){
         txtCodigoP.setText(String.valueOf(((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
         txtNitP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getNITproveedor()));
@@ -78,7 +77,6 @@ public class MenuProveedoresController implements Initializable   {
         txtContactoP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getContactoProveedor()));
         txtDireccionP.setText((((Proveedores)tblProveedores.getSelectionModel().getSelectedItem()).getDireccionProveedor()));  
     }
-    
     public ObservableList<Proveedores> getProveedores(){
         ArrayList<Proveedores>lista = new ArrayList<>();
         try{
@@ -90,7 +88,7 @@ public class MenuProveedoresController implements Initializable   {
                                         resultado.getString("nombreProveedor"),
                                         resultado.getString("apellidoProveedor"),
                                         resultado.getString("razonSocial"),
-                                        resultado.getString("contactoProveedores"),
+                                        resultado.getString("contactoProveedor"),
                                         resultado.getString("direccionProveedor")
                 ));
             }

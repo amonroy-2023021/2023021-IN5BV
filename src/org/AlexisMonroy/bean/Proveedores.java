@@ -8,7 +8,7 @@ public class Proveedores {
     private String apellidoProveedor;
     private String direccionProveedor;
     private String razonSocial;
-    private String contactoProveedores;
+    private String contactoProveedor;
 
     public Proveedores() {
     }
@@ -20,7 +20,7 @@ public class Proveedores {
         this.apellidoProveedor = apellidoProveedor;
         this.direccionProveedor = direccionProveedor;
         this.razonSocial = razonSocial;
-        this.contactoProveedores = contactoProveedores;
+        this.contactoProveedor = contactoProveedor;
     }
 
     public int getCodigoProveedor() {
@@ -72,10 +72,10 @@ public class Proveedores {
     }
 
     public String getContactoProveedor() {
-        return contactoProveedores;
+        return contactoProveedor;
     }
 
     public void setContactoProveedor(String contactoPrincipal) {
-        this.contactoProveedores = contactoPrincipal;
+        this.contactoProveedor = contactoPrincipal;
     }
 }

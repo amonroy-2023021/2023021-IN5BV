@@ -302,7 +302,7 @@ Delimiter $$
     in apellidoProveedor varchar(60),
     in direccionProveedor varchar(150),
     in razonSocial varchar(60),
-    in contactoProveedor varchar(100),
+    in contactoProveedor varchar(100))
 		Begin
 			Insert into Proveedores(
 			NITproveedor,
@@ -336,7 +336,7 @@ Delimiter $$
 			P.apellidoProveedor,
 			P.direccionProveedor,
 			P.razonSocial,
-            P.contactoProveedores,
+            P.contactoProveedores
             from Proveedores P;
         End $$
         
@@ -355,7 +355,7 @@ Delimiter $$
 			P.apellidoProveedor,
 			P.direccionProveedor,
 			P.razonSocial,
-            P.contactoProveedores,
+            P.contactoProveedores
             from Proveedores P
             where codigoProveedor = codPro;
         End $$
@@ -388,7 +388,7 @@ Delimiter $$
 				P.apellidoProveedor = apPro,
 				P.direccionProveedor = direcPro,
 				P.razonSocial = raSocial,
-				P.contactoProveedor = conPrin,
+				P.contactoProveedor = conPrin
                 where codigoProveedor = codPro;
 		End $$
         
