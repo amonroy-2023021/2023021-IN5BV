@@ -89,4 +89,10 @@ public class Productos {
     public void setCodigoProveedor(int codigoProveedor) {
         this.codigoProveedor = codigoProveedor;
     }
+    
+   // @Override
+   // public String ToString(){
+     //   return "Producto = " + descripcionProducto + ", Precio = " + precioUnitario;
+   // }
+    
 }
