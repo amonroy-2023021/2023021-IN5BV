@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bce411d3-68f7-410e-8946-24b78c0d190b">
 	<property name="ireport.zoom" value="0.6830134553650712"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="240"/>
 	<queryString>
 		<![CDATA[call sp_ListarClientes]]>
 	</queryString>
@@ -29,9 +29,9 @@
 	</field>
 	<background>
 		<band height="802" splitType="Stretch">
-			<image scaleImage="FillFrame">
-				<reportElement x="6" y="13" width="545" height="777" uuid="6d6efe5e-e4bc-45c9-98ae-9f1036062565"/>
-				<imageExpression><![CDATA["C:\\Users\\Informatica\\Downloads\\Minimalist Company Letterhead.png"]]></imageExpression>
+			<image>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="542" height="779" uuid="ce0d4839-275e-4ba6-b515-5b08740688c4"/>
+				<imageExpression><![CDATA["C:\\Users\\Dell\\Desktop\\Repositorio3\\2023021-IN5BV\\src\\org\\AlexisMonroy\\images\\Membrete.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
@@ -39,44 +39,44 @@
 		<band height="79" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="94" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="45" splitType="Stretch">
+		<band height="348" splitType="Stretch">
 			<staticText>
-				<reportElement x="31" y="1" width="100" height="20" uuid="03710367-ebb3-4dda-9d7f-44419736848c"/>
+				<reportElement x="31" y="260" width="100" height="20" uuid="03710367-ebb3-4dda-9d7f-44419736848c"/>
 				<text><![CDATA[nombreCliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="166" y="1" width="100" height="20" uuid="83e6dc0b-00f4-47ad-ba75-69ba51ce6327"/>
+				<reportElement x="185" y="260" width="100" height="20" uuid="83e6dc0b-00f4-47ad-ba75-69ba51ce6327"/>
 				<text><![CDATA[apellidoCliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="316" y="1" width="100" height="20" uuid="07acd96d-b38d-455a-a179-eeedd739f216"/>
+				<reportElement x="329" y="260" width="100" height="20" uuid="07acd96d-b38d-455a-a179-eeedd739f216"/>
 				<text><![CDATA[direccionCliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="1" width="100" height="20" uuid="0f6a4f47-a591-4887-9692-c2e5855d3c36"/>
+				<reportElement x="442" y="260" width="100" height="20" uuid="0f6a4f47-a591-4887-9692-c2e5855d3c36"/>
 				<text><![CDATA[NITcliente]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="37" splitType="Stretch">
+		<band height="168" splitType="Stretch">
 			<textField>
-				<reportElement x="31" y="8" width="100" height="20" uuid="2205c95d-07af-4cbc-b176-e4b178f630e5"/>
+				<reportElement x="31" y="0" width="100" height="20" uuid="2205c95d-07af-4cbc-b176-e4b178f630e5"/>
 				<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="166" y="8" width="100" height="20" uuid="7d5f3109-4c63-4479-bd03-d66410eaf73d"/>
+				<reportElement x="185" y="0" width="100" height="20" uuid="7d5f3109-4c63-4479-bd03-d66410eaf73d"/>
 				<textFieldExpression><![CDATA[$F{apellidoCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="316" y="8" width="100" height="20" uuid="9979420a-4c8f-49e9-977b-b246a996f0b7"/>
+				<reportElement x="329" y="0" width="100" height="20" uuid="9979420a-4c8f-49e9-977b-b246a996f0b7"/>
 				<textFieldExpression><![CDATA[$F{direccionCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="8" width="100" height="20" uuid="9d5dfda0-6146-4789-a460-2671a3877f5b"/>
+				<reportElement x="442" y="0" width="100" height="20" uuid="9d5dfda0-6146-4789-a460-2671a3877f5b"/>
 				<textFieldExpression><![CDATA[$F{NITcliente}]]></textFieldExpression>
 			</textField>
 		</band>

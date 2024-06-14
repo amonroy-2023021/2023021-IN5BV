@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javax.swing.JOptionPane;
 import org.AlexisMonroy.bean.Clientes;
 import org.AlexisMonroy.DB.Conexion;
 import org.AlexisMonroy.System.Main;
+import org.AlexisMonroy.report.GenerarReportes;
 
 /**
  * FXML Controller class
@@ -251,6 +254,8 @@ public class MenuClientesController implements Initializable {
     
     public void reportes(){
         switch(tipoDeOperaciones){
+            case NINGUNO:
+                imprimirReporte();
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -263,6 +268,13 @@ public class MenuClientesController implements Initializable {
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
+    }
+    
+    public void imprimirReporte(){
+         Map parametros = new HashMap();
+         parametros.put("CodigoCliente", null);
+         GenerarReportes.mostrarReportes("reporte.jasper", "Reporte de Clientes", parametros);
+        
     }
     
     public void actualizar(){
