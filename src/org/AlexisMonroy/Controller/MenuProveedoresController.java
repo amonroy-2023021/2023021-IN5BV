@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javax.swing.JOptionPane;
 import org.AlexisMonroy.bean.Proveedores;
 import org.AlexisMonroy.DB.Conexion;
 import org.AlexisMonroy.System.Main;
+import org.AlexisMonroy.report.GenerarReportes;
 
 public class MenuProveedoresController implements Initializable   {
     private Main setEscenarioPrincipalProveedores;
@@ -245,6 +248,8 @@ public class MenuProveedoresController implements Initializable   {
     
     public void reporte(){
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReporte();
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -253,7 +258,7 @@ public class MenuProveedoresController implements Initializable   {
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/AlexisMonroy/images/EditarProv.png"));
-                imgReporte.setImage(new Image("/org/AlexisMonroy/images/ReportesProv.png"));
+                imgReporte.setImage(new Image("/org/AlexisMonroy/images/ReporteProv.png"));
                 tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -261,6 +266,12 @@ public class MenuProveedoresController implements Initializable   {
                 throw new AssertionError();
         }
     }
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+         parametros.put("codigoProveedor", null);
+         GenerarReportes.mostrarReportes("reporteP.jasper", "Reporte de Producto", parametros);
+     }
     
     public void desactivarControles(){
         txtCodigoP.setEditable(false);

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteP" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ddc826fe-e7d3-413c-8355-ce0c9e5a513e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<queryString>
+		<![CDATA[call sp_ListarProveedores]]>
+	</queryString>
+	<field name="codigoProveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NITproveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contactoProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="11" width="532" height="781" uuid="b4cdf503-697c-4eaf-94f5-042fb6896bde"/>
+				<imageExpression><![CDATA["C:\\Users\\Dell\\Desktop\\Repositorio3\\2023021-IN5BV\\src\\org\\AlexisMonroy\\images\\Membrete.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="293" splitType="Stretch">
+			<staticText>
+				<reportElement x="58" y="273" width="100" height="20" uuid="944a68fa-666f-4d9d-96ab-f9f2d764fb86"/>
+				<text><![CDATA[NITproveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="273" width="100" height="20" uuid="94901dac-a1c4-4f61-b985-7edcdb1b1112"/>
+				<text><![CDATA[nombreProveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="273" width="100" height="20" uuid="58c3b886-011b-4efc-9bbe-8460e6c3ea6a"/>
+				<text><![CDATA[apellidoProveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="273" width="100" height="20" uuid="3280e93b-1711-4b81-b117-0006d062b9e1"/>
+				<text><![CDATA[contactoProveedor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="225" splitType="Stretch">
+			<textField>
+				<reportElement x="58" y="50" width="100" height="20" uuid="11a9748a-d271-4f2b-98cd-3cb74d8af1b4"/>
+				<textFieldExpression><![CDATA[$F{NITproveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="50" width="100" height="20" uuid="3840524f-aa35-4c61-b027-d9d802ace4ca"/>
+				<textFieldExpression><![CDATA[$F{nombreProveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="50" width="100" height="20" uuid="7d14f1ad-8439-4ddf-b911-ebd8547472aa"/>
+				<textFieldExpression><![CDATA[$F{apellidoProveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="50" width="100" height="20" uuid="6e757849-2127-49d3-a184-6038ad8853f6"/>
+				<textFieldExpression><![CDATA[$F{contactoProveedor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
